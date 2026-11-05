@@ -186,6 +186,23 @@ main{margin-left:0!important;width:100%!important;max-width:none!important;paddi
  .menu-drawer .nav button .nav-icon{width:32px;height:32px;flex-basis:32px}
 }
 
+
+/* Sequential follow-up interaction */
+.main-question{font-size:17px;line-height:1.55;margin:14px 0 8px}
+.main-answer{background:#111b24;border-color:#46515a;margin-top:8px}
+.followup-section{margin-top:20px;padding-top:16px;border-top:1px solid var(--line)}
+.followup-section-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
+.followup-section-head h3{margin:0}
+.followup-section-head span{font-size:10px;color:var(--muted)}
+.followup-next{padding:14px;background:#202c37;border:1px solid #6b5c42;border-radius:8px;margin:10px 0}
+.followup-q-label{font-size:10px;color:var(--gold);letter-spacing:.08em;margin-bottom:7px}
+.followup-q{font-size:13px;line-height:1.65;margin-bottom:12px}
+.followup-history{margin:12px 0;padding:12px;background:#17232d;border:1px solid var(--line);border-radius:8px}
+.followup-history .followup-q{margin-bottom:8px}
+.followup-answer{margin:0;background:#111b24}
+.earned-info{margin-top:14px;padding:14px;border:1px solid #60745e;background:rgba(92,117,88,.09);border-radius:8px;font-size:12px;line-height:1.75;white-space:pre-wrap}
+@media(max-width:700px){.followup-next,.followup-history,.earned-info{padding:11px}.main-question{font-size:15px}}
+
 </style></head><body>
 <div class="menu-backdrop" id="menu-backdrop"></div>
 <aside class="menu-drawer" id="menu-drawer" aria-hidden="true">
@@ -357,7 +374,51 @@ const interrogationCategories={
   {key:"staff",label:"호텔 직원 진술",from:90,to:94},
   {key:"final",label:"최종 심문",from:95,to:104}
  ]};
-function stateFor(name){if(!interrogationState[name])interrogationState[name]={done:[],openedEvidence:[]};const st=interrogationState[name];if(!Array.isArray(st.done))st.done=[];if(!Array.isArray(st.openedEvidence))st.openedEvidence=[];if(!st.category)st.category=(interrogationCategories[name]||[])[0]?.key||"basic";return st}
+function parseInterrogationBody(raw){
+ const body=String(raw||"").replace(/\r/g,"");
+ const followups=[];
+ const inlineRe=/\*\*추가 질문:\s*([\s\S]*?)\*\*\s*([\s\S]*?)(?=\n\s*\*\*추가 질문(?::|\*\*)|\n\s*\*\*[^*\n]*(?:제시 후|획득 정보|해금)[^*\n]*\*\*|\s*$)/g;
+ let m;
+ while((m=inlineRe.exec(body))!==null){
+  const question=m[1].trim(),answer=m[2].trim();
+  if(question&&answer)followups.push({at:m.index,question,answer});
+ }
+ const bulletRe=/(?:^|\n)\s*-\s*Q\d{2}-[A-Z]\.\s*(.+?)\s*\n([\s\S]*?)(?=\n\s*-\s*Q\d{2}-[A-Z]\.\s*|\n\s*\*\*획득 정보|\n\s*\*\*해금|\s*$)/g;
+ while((m=bulletRe.exec(body))!==null){
+  const question=m[1].trim(),answer=m[2].trim();
+  if(question&&answer)followups.push({at:m.index,question,answer});
+ }
+ followups.sort((a,b)=>a.at-b.at);
+ const infoMatch=body.match(/\*\*획득 정보:?\*\*:?\s*([\s\S]*?)(?=\n\s*\*\*해금\*\*|\s*$)/);
+ const info=infoMatch?infoMatch[1].trim():"";
+ const evidence=[];
+ const evidenceRe=/\*\*([^*\n]*(?:E-\d{3}|직원 진술|증거 제시 후)[^*\n]*(?:제시 후|반응)[^*\n]*)\*\*\s*([\s\S]*?)(?=\n\s*\*\*[^*]+\*\*|\s*$)/g;
+ while((m=evidenceRe.exec(body))!==null){
+  if(m[2].trim())evidence.push({label:m[1].trim(),answer:m[2].trim()});
+ }
+ const boundaries=[];
+ const firstFollow=body.search(/\*\*추가 질문(?::|\*\*)/);
+ if(firstFollow>=0)boundaries.push(firstFollow);
+ const infoAt=body.search(/\*\*획득 정보:?\*\*/);
+ if(infoAt>=0)boundaries.push(infoAt);
+ const unlockAt=body.search(/\*\*해금\*\*/);
+ if(unlockAt>=0)boundaries.push(unlockAt);
+ const evidenceAt=body.search(/\*\*(?:E-\d{3}[^*]*제시 후|직원 진술 제시 후|증거 제시 후 반응)\*\*/);
+ if(evidenceAt>=0)boundaries.push(evidenceAt);
+ const initialEnd=boundaries.length?Math.min(...boundaries):body.length;
+ const initial=body.slice(0,initialEnd).replace(/\*\*최초 답변\*\*/g,"").trim();
+ return {initial,followups,info,evidence};
+}
+function evidenceBlockMatches(block,activeEvidence){
+ if(!activeEvidence)return false;
+ if(block.label.includes(activeEvidence))return true;
+ if(block.label.includes("직원 진술")&&activeEvidence==="E-012")return true;
+ if(block.label.includes("레스토랑 직원")&&activeEvidence==="E-014"&&collected.includes("E-012"))return true;
+ if(block.label.includes("증거 제시 후")||block.label.includes("증거 제시 후 반응"))return true;
+ return false;
+}
+
+function stateFor(name){if(!interrogationState[name])interrogationState[name]={done:[],openedEvidence:[]};const st=interrogationState[name];if(!Array.isArray(st.done))st.done=[];if(!Array.isArray(st.openedEvidence))st.openedEvidence=[];if(!st.followupProgress||typeof st.followupProgress!=="object")st.followupProgress={};if(!st.category)st.category=(interrogationCategories[name]||[])[0]?.key||"basic";return st}
 function saveInterrogation(){localStorage.setItem("crimeInterrogation",JSON.stringify(interrogationState))}
 function questionUnlocked(name,id){
  if(name==="한유진"){
@@ -411,7 +472,7 @@ function renderInterSuspects(){
 }
 function renderInterrogation(){
  if(!currentSuspect)return;
- const s=S.find(x=>x[1]===currentSuspect), qs=INTERROGATION_DATA[currentSuspect]||[], st=stateFor(currentSuspect);
+ const suspect=S.find(x=>x[1]===currentSuspect),qs=INTERROGATION_DATA[currentSuspect]||[],st=stateFor(currentSuspect);
  const total=currentSuspect==="한유진"?104:(currentSuspect==="윤서하"?67:qs.length);
  const categories=interrogationCategories[currentSuspect]||[{key:"basic",label:"전체 심문",from:1,to:total}];
  const categoryStats=categories.map(cat=>{
@@ -424,26 +485,39 @@ function renderInterrogation(){
  let active=available.find(c=>c.key===st.category);
  if(!active){active=available[0]||categoryStats[0];st.category=active.key;saveInterrogation()}
  if(selectedQuestion!==null&&!active.list.some(q=>q.id===selectedQuestion&&questionUnlocked(currentSuspect,q.id)))selectedQuestion=null;
- const visibleQuestions=active.unlocked;
  const categoryButtons=categoryStats.map((cat,i)=>{
-  const unlocked=cat.unlocked.length>0;
-  const isActive=active.key===cat.key;
+  const unlocked=cat.unlocked.length>0,isActive=active.key===cat.key;
   const nextLocked=!unlocked&&i===categoryStats.findIndex(c=>c.unlocked.length>0)+1;
   if(!unlocked&&!nextLocked)return "";
-  const count=cat.done.length+"/"+cat.list.length;
   return `<button data-category="${cat.key}" class="${isActive?"active":""}" ${unlocked?"":"disabled"}>${cat.label}<small>${unlocked?`${cat.done.length} / ${cat.list.length} 확인`:"선행 단계 필요"}</small></button>`;
  }).join("");
- const buttons=visibleQuestions.map(q=>{
+ const buttons=active.unlocked.map(q=>{
   const done=st.done.includes(q.id);
   return `<button data-question="${q.id}" class="${done?"done":""} ${selectedQuestion===q.id?"selected":""}"><small>Q${String(q.id).padStart(2,"0")} ${done?"· 확인 완료":"· 질문하기"}</small>${escapeHTML(q.question)}</button>`;
  }).join("");
- let answer=`<div class="inter-answer-placeholder">왼쪽에서 질문을 선택하면<br>질문과 답변이 이곳에 표시됩니다.</div>`;
+
+ let answer=`<div class="inter-answer-placeholder">왼쪽에서 질문을 선택하면<br>최초 답변이 이곳에 표시됩니다.</div>`;
  if(selectedQuestion!==null){
   const q=qs.find(x=>x.id===selectedQuestion);
-  if(q)answer=`<div class="inter-meta"><span>Q${String(q.id).padStart(2,"0")}</span><span>원본 대본</span><span>${st.done.includes(q.id)?"확인 완료":"진행 중"}</span></div><h3>${escapeHTML(q.question)}</h3><div class="dialogue">${escapeHTML(q.body||"원본에 추가 답변이 기록되어 있지 않습니다.")}</div><div class="inter-toolbar"><button class="btn primary" id="mark-question">${st.done.includes(q.id)?"확인 완료됨":"질문 확인 처리"}</button></div>`;
+  if(q){
+   const parsed=parseInterrogationBody(q.body),progress=Math.min(parsed.followups.length,Number(st.followupProgress[q.id]||0));
+   const done=st.done.includes(q.id),asked=parsed.followups.slice(0,progress);
+   const history=asked.map((f,i)=>`<div class="followup-history"><div class="followup-q-label">추가 질문 ${i+1}</div><div class="followup-q">${escapeHTML(f.question)}</div><div class="dialogue followup-answer">${escapeHTML(f.answer)}</div></div>`).join("");
+   const pending=progress<parsed.followups.length?`<div class="followup-next"><div class="followup-q-label">다음 추가 질문 · ${progress+1} / ${parsed.followups.length}</div><div class="followup-q">${escapeHTML(parsed.followups[progress].question)}</div><button class="btn primary" id="ask-followup">이 질문하기</button></div>`:"";
+   const completeButton=(!done&&progress>=parsed.followups.length)?`<button class="btn primary" id="complete-question">질문 완료 및 정보 확인</button>`:"";
+   const info=done&&parsed.info?`<div class="earned-info"><div class="followup-q-label">획득 정보</div><div>${escapeHTML(parsed.info)}</div></div>`:"";
+   const noFollow=parsed.followups.length===0?`<div class="followup-next"><div class="followup-q-label">추가 질문</div><p>이 질문에는 별도의 추가 질문이 없습니다.</p></div>`:"";
+   const conditional=parsed.evidence.filter(b=>evidenceBlockMatches(b,st.activeEvidence)).map(b=>`<div class="followup-history"><div class="followup-q-label">${escapeHTML(b.label)}</div><div class="dialogue">${escapeHTML(b.answer)}</div></div>`).join("");
+   answer=`<div class="inter-meta"><span>Q${String(q.id).padStart(2,"0")}</span><span>원본 대본</span><span>${done?"확인 완료":"진행 중"}</span></div>
+    <h3 class="main-question">${escapeHTML(q.question)}</h3>
+    <div class="dialogue main-answer">${escapeHTML(parsed.initial||"기록된 최초 답변이 없습니다.")}</div>
+    <div class="followup-section"><div class="followup-section-head"><h3>추가 질문</h3><span>${progress} / ${parsed.followups.length} 진행</span></div>
+     ${history}${pending}${noFollow}${completeButton}${info}${conditional}
+    </div>`;
+  }
  }
  const evidence=(suspectEvidence[currentSuspect]||[]).map(id=>{
-  const e=E.find(x=>x[0]===id), got=collected.includes(id);
+  const e=E.find(x=>x[0]===id),got=collected.includes(id);
   return `<button data-present="${id}" ${got?"":"disabled"} title="${got?"증거 제시":"먼저 증거 자료실에서 확보해야 합니다."}">${id} · ${e?e[1]:id}${got?"":" (미확보)"}</button>`;
  }).join("");
  let evidenceResponse="";
@@ -457,7 +531,7 @@ function renderInterrogation(){
  const yujinNotice=currentSuspect==="한유진"?`<details class="locked-note"><summary>심문 진행 원칙 및 최종 자백 조건</summary><p>과거 사고 관련 진술은 대체로 인정하지만, 사건 당일 객실 방문과 객실 내부 상황은 단계적으로 숨깁니다. E-008은 동기, E-005·E-006은 방문, E-009는 사망 원인·시간대, E-003은 사라진 장식품을 확인합니다. CCTV·카드키 기록은 객실 내부의 살인 행위를 단독 입증하지 않습니다.</p><p>현재 E-003은 장식품의 소실 사실만 확인하는 자료입니다. 장식품과 한유진을 연결하는 실제 감식 결과나 물증은 아직 확정되지 않았으므로, 이 증거만으로 최종 자백을 활성화하지 않습니다. 사망 추정 시각도 22:32로 고정하지 않습니다.</p></details>`:"";
  const confession=currentSuspect==="한유진"?(yujinConfessionUnlocked()?`<div class="section"><h3>최종 범행 인정</h3><span>FINAL CONFESSION</span></div><div class="dialogue">${escapeHTML(FINAL_CONFESSION)}</div>`:`<div class="locked-note"><b>최종 범행 인정 — 잠금</b><br>장식품과 한유진을 연결하는 실제 감식 결과 또는 물증이 증거 목록에 추가되어야 최종 자백 대사를 공개할 수 있습니다.</div>`):"";
  $("#inter-panel").innerHTML=`
- <div class="inter-suspect-head"><div><span class="eyebrow">SUSPECT ${s[0]} · INTERROGATION</span><h3>${s[1]}</h3><p class="muted">${s[3]} · ${s[7]}</p></div><span class="tag">${st.done.length} / ${total} 확인</span></div>
+ <div class="inter-suspect-head"><div><span class="eyebrow">SUSPECT ${suspect[0]} · INTERROGATION</span><h3>${suspect[1]}</h3><p class="muted">${suspect[3]} · ${suspect[7]}</p></div><span class="tag">${st.done.length} / ${total} 확인</span></div>
  <div class="inter-progress"><i style="width:${Math.min(100,st.done.length/Math.max(1,total)*100)}%"></i></div>
  <div class="inter-meta"><span>질문 ${st.done.length} / ${total}</span><span>증거 ${collected.filter(x=>(suspectEvidence[currentSuspect]||[]).includes(x)).length} / ${(suspectEvidence[currentSuspect]||[]).length} 확보</span></div>
  <div class="inter-layout">
@@ -483,12 +557,21 @@ function renderInterrogation(){
  });
  document.querySelectorAll("[data-question]").forEach(b=>b.onclick=()=>{
   selectedQuestion=Number(b.dataset.question);
-  if(!st.done.includes(selectedQuestion))st.done.push(selectedQuestion);
+  const selected=qs.find(q=>q.id===selectedQuestion),parsed=selected?parseInterrogationBody(selected.body):null;
+  if(selected&&parsed&&parsed.followups.length&&st.done.includes(selectedQuestion)&&st.followupProgress[selectedQuestion]===undefined){
+   st.done=st.done.filter(id=>id!==selectedQuestion);
+  }
+  if(st.followupProgress[selectedQuestion]===undefined)st.followupProgress[selectedQuestion]=0;
   saveInterrogation();renderInterSuspects();renderInterrogation();
  });
- const mark=$("#mark-question");if(mark)mark.onclick=()=>{
-  if(!st.done.includes(selectedQuestion))st.done.push(selectedQuestion);
-  saveInterrogation();renderInterSuspects();renderInterrogation();toast("질문 진행 상황을 저장했습니다.")
+ const ask=$("#ask-followup");if(ask)ask.onclick=()=>{
+  const q=qs.find(x=>x.id===selectedQuestion);if(!q)return;
+  const parsed=parseInterrogationBody(q.body),n=Number(st.followupProgress[q.id]||0);
+  if(n<parsed.followups.length){st.followupProgress[q.id]=n+1;saveInterrogation();renderInterrogation()}
+ };
+ const complete=$("#complete-question");if(complete)complete.onclick=()=>{
+  if(selectedQuestion!==null&&!st.done.includes(selectedQuestion))st.done.push(selectedQuestion);
+  saveInterrogation();renderInterSuspects();renderInterrogation();toast("질문이 완료되고 획득 정보가 공개되었습니다.")
  };
  document.querySelectorAll("[data-present]").forEach(b=>b.onclick=()=>{
   if(!collected.includes(b.dataset.present))return;
