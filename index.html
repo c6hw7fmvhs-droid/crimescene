@@ -203,6 +203,17 @@ main{margin-left:0!important;width:100%!important;max-width:none!important;paddi
 .earned-info{margin-top:14px;padding:14px;border:1px solid #60745e;background:rgba(92,117,88,.09);border-radius:8px;font-size:12px;line-height:1.75;white-space:pre-wrap}
 @media(max-width:700px){.followup-next,.followup-history,.earned-info{padding:11px}.main-question{font-size:15px}}
 
+
+/* Architectural floor plan + mixed-mode investigation */
+.scene-intro{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin:18px 0 14px}
+.scene-progress{min-width:190px;text-align:right;font-size:10px;color:var(--muted)}.scene-progress strong{display:block;color:var(--gold);font-size:18px;font-weight:600;margin-bottom:7px}.scene-progress-bar{height:5px;background:#27333d;border-radius:9px;overflow:hidden}.scene-progress-bar i{display:block;height:100%;background:var(--gold);width:0;transition:width .2s}
+.plan-legend{display:flex;gap:17px;flex-wrap:wrap;margin:0 0 9px;color:var(--muted);font-size:10px}.plan-legend span{display:flex;align-items:center;gap:6px}.plan-legend i{width:12px;height:8px;display:inline-block;border:1px solid #9ba2a1}.legend-room{background:#f4f1e9}.legend-door{border:0!important;border-top:2px solid #d0b783!important}.legend-window{border:0!important;border-top:3px double #9fc0c9!important}.legend-done{background:#c9d8c8;border-color:#668674!important}
+.plan-frame{background:#e9e6de;border:1px solid #a7a49b;border-radius:7px;padding:10px;box-shadow:0 8px 26px #0002;overflow:hidden}.architectural-plan{display:block;width:100%;height:auto;max-height:680px;background:#eeece5}.plan-room{cursor:pointer;outline:none}.plan-room .room-fill{fill:#f7f5ef;stroke:#30383a;stroke-width:7;transition:fill .15s,stroke .15s}.plan-room:hover .room-fill{fill:#eee6d4;stroke:#9b8050}.plan-room.active .room-fill{fill:#e9dfc8;stroke:#9b8050;stroke-width:9}.plan-room.done .room-fill{fill:#e3ebe1}.plan-room .room-label{font-family:Arial,sans-serif;fill:#30383a;font-size:18px;font-weight:700;letter-spacing:1px;pointer-events:none}.plan-room .room-sub{font-family:Arial,sans-serif;fill:#657071;font-size:11px;letter-spacing:1.2px;pointer-events:none}.plan-room .room-count{font-family:Arial,sans-serif;fill:#6d745f;font-size:10px;pointer-events:none}.plan-room .furn{fill:none;stroke:#9da19b;stroke-width:2.1;pointer-events:none}.plan-room .furn-fill{fill:#e5e1d7;stroke:#9da19b;stroke-width:1.8;pointer-events:none}.plan-room .done-mark{fill:#55775d;stroke:#f7f5ef;stroke-width:2}.plan-detail{fill:none;stroke:#747c7a;stroke-width:1.4;pointer-events:none}.plan-door{fill:none;stroke:#a58a58;stroke-width:2.2;pointer-events:none}.plan-window{stroke:#6f9ba5;stroke-width:5;pointer-events:none}.plan-dimension{fill:#687171;font:10px Arial,sans-serif;letter-spacing:1px}.plan-north{fill:#4d5554;font:12px Arial,sans-serif;font-weight:bold}.plan-caption{display:flex;justify-content:space-between;gap:10px;padding:9px 4px 1px;color:#525a58;font-size:9px;letter-spacing:.12em}
+.scene-toolbar{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:14px 0}.scene-hint{font-size:10px;color:var(--muted);line-height:1.6}.room-detail{margin-top:18px}.room-detail-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;padding:15px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.room-detail-head h3{font-size:21px;margin:5px 0}.room-detail-head p{font-size:11px;color:#aeb8c0;line-height:1.6;margin:0}.room-stats{min-width:125px;text-align:right}.room-stats strong{display:block;color:var(--gold);font-size:20px}.room-stats small{color:var(--muted);font-size:9px}
+.room-plan-panel{position:relative;margin-top:14px;padding:13px;background:#e9e6de;border:1px solid #aaa69d;border-radius:7px;overflow:hidden}.room-plan-title{display:flex;justify-content:space-between;gap:10px;color:#424b49;font-size:9px;letter-spacing:.1em;margin-bottom:8px}.object-map{position:relative;min-height:225px;background:#f6f4ed;border:5px solid #414847;overflow:hidden}.object-map:before,.object-map:after{content:"";position:absolute;background:#b3b5ae;opacity:.65}.object-map:before{left:0;right:0;top:50%;height:1px}.object-map:after{top:0;bottom:0;left:50%;width:1px}.object-map-furniture{position:absolute;border:2px solid #a1a49e;background:#e8e4da;border-radius:3px;color:#69716d;font-size:9px;display:grid;place-items:center;text-align:center;padding:4px;pointer-events:none}.object-hotspot{position:absolute;z-index:2;transform:translate(-50%,-50%);border:1px solid #6e746e;background:#fffdf7;color:#333c3a;border-radius:3px;padding:5px 7px;font-size:9px;max-width:120px;box-shadow:0 2px 5px #0002;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.object-hotspot:before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#a58a58;margin-right:5px}.object-hotspot:hover,.object-hotspot.active{background:#e8dcc0;border-color:#987c49}.object-hotspot.done:before{background:#62856b}.object-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}.object-card{min-height:72px;text-align:left;border:1px solid var(--line);border-radius:5px;background:var(--panel);padding:10px;display:flex;flex-direction:column;justify-content:space-between;gap:7px}.object-card:hover,.object-card.active{border-color:var(--gold);background:#b69a6810}.object-card.done{border-color:#536d5c}.object-card b{font-size:11px;font-weight:550}.object-card small{font-size:9px;color:var(--muted);line-height:1.4}.object-card .object-status{font-size:9px;color:var(--gold)}.object-card.done .object-status{color:#a8c2ad}
+.object-inspector{margin-top:15px;border:1px solid #6b5c42;border-radius:7px;background:#141f28;padding:16px}.object-inspector-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.object-inspector h3{font-size:18px;margin:5px 0 7px}.object-inspector p{font-size:11px;color:#b5c0c8;line-height:1.7}.inspect-tools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:14px 0}.inspect-tool{background:#202c36;border:1px solid var(--line);border-radius:5px;padding:11px 8px;text-align:center;color:#b9c3ca;font-size:10px}.inspect-tool b{display:block;color:#e0e4e5;font-size:11px;margin-bottom:4px}.inspect-tool.active{border-color:var(--gold);background:#b69a6814}.inspect-tool:disabled{opacity:.4}.inspect-stage{border:1px solid #34424d;border-radius:6px;background:#101a22;padding:13px;margin-top:10px}.inspect-stage h4{font-size:12px;margin:0 0 7px;color:#d5bd91}.inspect-stage p{margin:0 0 10px}.inspect-steps{display:grid;gap:7px;margin-top:10px}.inspect-step{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px;background:#202c36;border:1px solid var(--line);border-radius:5px;text-align:left;font-size:10px}.inspect-step.done{border-color:#60745e;color:#b9cdbb}.inspect-result{margin-top:11px;padding:12px;border-left:2px solid var(--gold);background:#b69a6810;font-size:11px;line-height:1.7;color:#c0c8ce;white-space:pre-line}.search-targets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:10px}.search-target{padding:11px 7px;border:1px dashed #6b5c42;border-radius:5px;background:#1b2832;color:#c7d0d5;font-size:10px}.search-target.done{border-style:solid;border-color:#668674;color:#b8d1bd}.evidence-found{margin-top:13px;padding:13px;border:1px solid #668674;border-radius:6px;background:#66867412}.evidence-found strong{display:block;color:#b9d1bd;margin-bottom:5px}.evidence-found p{margin:5px 0 10px}.room-back{margin-top:12px}
+@media(max-width:900px){.object-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.room-detail-head{align-items:flex-start}.plan-frame{padding:6px}.plan-caption{font-size:8px}}
+@media(max-width:700px){.scene-intro{align-items:flex-start;flex-direction:column}.scene-progress{text-align:left;width:100%}.plan-legend{gap:9px;font-size:9px}.plan-frame{margin:0 -3px}.plan-caption{font-size:7px;letter-spacing:.05em}.architectural-plan{min-height:235px}.room-detail-head{flex-direction:column}.room-stats{text-align:left;display:flex;align-items:center;gap:10px}.room-stats strong{font-size:16px}.object-map{min-height:195px}.object-hotspot{font-size:8px;padding:4px 5px;max-width:88px}.object-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.object-card{min-height:68px}.inspect-tools{gap:5px}.inspect-tool{padding:9px 4px;font-size:9px}.search-targets{grid-template-columns:1fr}.object-inspector{padding:12px}}
 </style></head><body>
 <div class="menu-backdrop" id="menu-backdrop"></div>
 <aside class="menu-drawer" id="menu-drawer" aria-hidden="true">
@@ -226,7 +237,12 @@ main{margin-left:0!important;width:100%!important;max-width:none!important;paddi
 <section class="page" id="case"><p class="eyebrow">CASE BRIEFING</p><h2>사건 브리핑</h2><p class="lead">호텔 아르덴에서 발생한 사건의 기본 정보와 현재까지 확인된 사실입니다.</p><div class="panel"><h3>CASE 001 · THE LAST CHECKOUT</h3><div id="facts"></div></div><div class="section"><h3>사건 타임라인</h3><span>PROVISIONAL</span></div><div class="panel timeline" id="timeline"></div><div class="notice">22:32는 임시 추정 시각입니다. 객실 출입 시각과 사망 추정 시간은 CCTV, 카드키 기록, 직원 진술 및 부검 자료와 대조해 확정해야 합니다.</div></section>
 
 <section class="page" id="suspects"><p class="eyebrow">PERSONNEL FILE</p><h2>용의자 정보</h2><p class="lead">사건 당일 피해자와 접촉했거나 사건과 관련된 비밀을 가진 네 명의 인물입니다.</p><div class="grid two" id="suspect-list"></div></section>
-<section class="page" id="scene"><p class="eyebrow">CRIME SCENE INVESTIGATION</p><h2>현장 조사</h2><p class="lead">호텔 아르덴 내부 주요 구역을 선택해 관련 증거를 확인하십시오.</p><div class="scene" id="locations"></div><div class="notice">장소별 상세 이미지와 클릭형 오브젝트는 별도 자료가 확정되면 연결할 수 있도록 구성했습니다.</div></section>
+<section class="page" id="scene"><p class="eyebrow">CRIME SCENE INVESTIGATION</p><h2>현장 조사</h2><p class="lead">건축 평면도에서 공간을 선택하고, 내부 오브젝트를 관찰·확대·조작해 단서를 확인하십시오.</p>
+<div class="scene-intro"><div><span class="tag">HOTEL ARDEN · 32F</span><p class="scene-hint" style="margin-top:9px">PRESIDENTIAL SUITE · ARCHITECTURAL FLOOR PLAN<br>각 공간을 선택해 현장을 조사하십시오.</p></div><div class="scene-progress"><strong id="scene-progress-text">0 / 8 구역 조사 완료</strong><div class="scene-progress-bar"><i id="scene-progress-fill"></i></div></div></div>
+<div class="scene-subhead"><h3>프레지덴셜 스위트 평면도</h3><span>32F · TOP VIEW · NOT TO SCALE</span></div><div class="plan-legend"><span><i class="legend-room"></i> 조사 구역</span><span><i class="legend-door"></i> 출입문</span><span><i class="legend-window"></i> 창문</span><span><i class="legend-done"></i> 조사 완료</span></div><div class="plan-frame"><svg id="suite-map" class="architectural-plan" viewBox="0 0 1000 620" role="img" aria-label="호텔 아르덴 프레지덴셜 스위트 건축 평면도"></svg><div class="plan-caption"><span>HOTEL ARDEN / PRESIDENTIAL SUITE</span><span>LEVEL 32 · SCHEMATIC PLAN</span></div></div>
+<div class="scene-toolbar"><span class="scene-hint">방을 선택하면 해당 공간의 평면도와 조사 가능한 오브젝트가 표시됩니다.</span><button class="btn" id="scene-back-map" style="display:none">전체 평면도로 돌아가기</button></div>
+<div id="room-detail" class="room-detail"></div>
+<div class="notice">객실 내 증거 배치는 현재 제작용 제안안입니다. E-001~E-004 및 E-010의 위치와 조사 내용은 실제 사건 설정이 확정되면 조정합니다. 별도 수사 경로의 증거는 현장 조사에서 임의로 생성하지 않습니다.</div></section>
 <section class="page" id="evidence"><p class="eyebrow">EVIDENCE STORAGE</p><h2>증거 자료실</h2><p class="lead">수집한 자료를 확인합니다. 각 증거는 다른 기록과 진술을 함께 검토해야 합니다.</p><div class="tabs"><button class="tab active" data-filter="all">전체</button><button class="tab" data-filter="scene">현장</button><button class="tab" data-filter="record">기록</button><button class="tab" data-filter="additional">추가 조사</button></div><div class="grid two" id="evidence-list"></div></section>
 <section class="page" id="interrogation"><p class="eyebrow">INTERROGATION ROOM</p><h2>심문실</h2><p class="lead">용의자를 선택하고 질문 주제를 확인하십시오. 증거 제시는 자료 확보 후 진행하는 구조입니다.</p><div class="interrogate"><div class="suspects" id="inter-suspects"></div><div class="panel" id="inter-panel"><h3>심문 대상 선택</h3><p class="muted">용의자를 선택하십시오.</p></div></div></section>
 <section class="page" id="notes"><p class="eyebrow">INVESTIGATION LOG</p><h2>수사 노트</h2><p class="lead">발견한 사실과 증거 간 연결 관계를 기록합니다.</p><div class="panel"><textarea id="notes" class="textarea" placeholder="수사 중 떠오른 생각과 추리를 기록하세요."></textarea><div class="actions"><button class="btn primary" id="save-note">기록 저장</button><button class="btn" id="clear-note">비우기</button></div></div><div class="notice">수사 노트는 이 기기에 저장되며 정답 판정에는 직접 반영되지 않습니다.</div></section>
@@ -251,16 +267,16 @@ const S=[
 ["D","한유진",33,"독립 출판사 운영 · 피해자의 친딸","18년 전 물류시설 화재로 어머니를 잃었다. 최근 사고 은폐의 진실을 알게 된 뒤 아버지를 찾아갔다.","과거 사고 은폐와 살인 관련 사실","Q01–Q104","조용하고 신중하며 감정 표현이 적음"]
 ];
 const E=[
-["E-001","두 개의 와인잔","scene","32층 스위트 · 서재","객실 안에서 두 사람이 만났을 가능성을 보여준다. 잔만으로 방문자를 특정할 수 없다."],
-["E-002","찢어진 편지","scene","32층 스위트 · 서재","피해자와 윤서하의 과거 관계를 확인할 수 있는 편지 일부. 훼손 경위는 추가 확인이 필요하다."],
-["E-003","사라진 장식품","scene","32층 스위트 · 서재","범행에 사용되었을 가능성이 제기된 장식품. 발견 위치와 감식 결과는 미확정이다."],
-["E-004","찢어진 계약서","scene","32층 스위트 · 서재","피해자와 강태준 사이의 지분 및 경영권 갈등과 관련된 문서."],
+["E-001","두 개의 와인잔","scene","32층 스위트 · 다이닝룸 (배치안)","객실 안에서 두 사람이 만났을 가능성을 보여준다. 잔만으로 방문자를 특정할 수 없다."],
+["E-002","찢어진 편지","scene","32층 스위트 · 거실 (배치안)","피해자와 윤서하의 과거 관계를 확인할 수 있는 편지 일부. 훼손 경위는 추가 확인이 필요하다."],
+["E-003","사라진 장식품","scene","32층 스위트 · 거실 (배치안)","범행에 사용되었을 가능성이 제기된 장식품. 발견 위치와 감식 결과는 미확정이다."],
+["E-004","찢어진 계약서","scene","32층 스위트 · 서재 (배치안)","피해자와 강태준 사이의 지분 및 경영권 갈등과 관련된 문서."],
 ["E-005","32층 복도 CCTV","record","호텔 아르덴 · 32층 복도","용의자들의 복도 이동 정황을 확인한다. 객실 내부 상황은 입증하지 않는다."],
 ["E-006","객실 출입 기록","record","호텔 객실 출입 시스템","카드키 사용 및 출입 시각을 확인한다. 실제 사용자의 신원은 별도 검증이 필요하다."],
 ["E-007","통화 기록","record","휴대전화 및 업무 연락","강태준의 변호사 통화와 이도현의 업무 연락이 동일 자료인지 확인이 필요하다."],
 ["E-008","과거 화재 사고 보고서","record","아르덴 그룹 내부 자료","18년 전 물류시설 화재와 안전 문제, 사고 보고서 조작 정황을 확인한다."],
 ["E-009","부검 결과","additional","수사기관 자료","사망 원인과 추정 시간 범위를 확인한다. 특정 분 단위의 사망 시각을 단정하지 않는다."],
-["E-010","한도윤 개인 메모","additional","피해자 개인 자료","사건 당일 만남 예정자를 확인하기 위한 자료. 실제 문구는 최종 확정이 필요하다."],
+["E-010","한도윤 개인 메모","additional","32층 스위트 · 서재 (배치안)","사건 당일 만남 예정자를 확인하기 위한 자료. 실제 문구는 최종 확정이 필요하다."],
 ["E-011","한유진 소지품","additional","추가 조사 자료","과거 사고 자료와 한유진의 연결을 확인한다. 구체적인 구성은 미확정이다."],
 ["E-012","호텔 직원 진술","additional","호텔 아르덴","직원이 직접 목격한 시각·장소·행동만 입증한다. 진술 내용과 목격 시각 확인이 필요하다."],
 ["E-013","회사 회계 자료","additional","아르덴 그룹","강태준의 회사 자금 유용 정황과 관련된 추가 자료."],
@@ -284,8 +300,148 @@ $("#dash-suspects").innerHTML=S.map(person).join("");$("#suspect-list").innerHTM
 document.querySelectorAll("[data-person]").forEach(b=>b.onclick=()=>{go("interrogation");choose(S.find(s=>s[1]===b.dataset.person))});
 $("#facts").innerHTML=[["사건 장소","호텔 아르덴 · 32층"],["사건 객실","프레지덴셜 스위트"],["피해자","한도윤 · 56세"],["직업","아르덴 그룹 대표이사"],["발견 시각","다음 날 00:15"],["신고 시각","00:25"],["사망 추정 범위","22:10 ~ 22:50"],["조사 대상","용의자 4명"]].map(x=>`<div class="fact"><span>${x[0]}</span><b>${x[1]}</b></div>`).join("");
 $("#timeline").innerHTML=T.map(x=>`<div class="time"><b>${x[0]}</b><span>${x[1]}</span></div>`).join("");
-$("#locations").innerHTML=L.map(x=>`<article class="card location"><div><span class="eyebrow">LOCATION ${x[0]}</span><h3>${x[1]}</h3><p>${x[2]}</p></div><button class="btn" data-loc="${x[3]}">관련 증거 보기</button></article>`).join("");
-function evcard(e){let got=collected.includes(e[0]);return `<article class="card evidence ${got?"got":""}"><div style="display:flex;justify-content:space-between"><span class="eyebrow">${e[0]}</span><span class="tag">${e[2]==="scene"?"현장":e[2]==="record"?"기록":"추가 조사"}</span></div><h3>${e[1]}</h3><div class="muted">${e[3]}</div><p>${e[4]}</p><button class="btn ${got?"":"primary"}" data-collect="${e[0]}" ${got?"disabled":""}>${got?"확보 완료":"증거 확보"}</button></article>`}
+const SUITE_ROOMS=[
+ {id:"entrance",code:"A",name:"현관",en:"ENTRANCE",desc:"대리석 바닥과 매립형 수납장이 있는 독립 출입 공간.",cls:"room-entrance",symbol:"01",items:[
+  ["출입문","출입문과 문틀의 외관을 확인한다.",["문 주변 확인","잠금장치 외관 확인"],"문과 문틀의 외관을 확인했다. 이 조사만으로 출입 시각이나 출입자를 특정할 수는 없다."],
+  ["도어락 패널","객실 출입 시스템이 설치된 패널이다.",["패널 외관 확인","표시부 확인"],"도어락 패널의 외관을 확인했다. 실제 사용 기록은 별도 출입 기록 자료와 대조해야 한다."],
+  ["신발장","현관 한쪽에 설치된 수납장이다.",["수납장 열기"],"신발장 내부와 보관 상태를 확인했다."],
+  ["외투 보관함","외투와 개인 물품을 보관하는 공간이다.",["보관함 열기"],"외투 보관함 내부를 확인했다."],
+  ["현관 콘솔","현관 벽면에 놓인 작은 콘솔이다.",["상판 확인"],"콘솔 위 장식품과 주변을 확인했다."],
+  ["벽면 거울","현관 벽에 설치된 전신 거울이다.",["거울과 프레임 확인"],"거울과 프레임의 외관을 확인했다."]]},
+ {id:"living",code:"B",name:"거실",en:"LIVING ROOM",desc:"대형 소파와 커피 테이블, 장식장, 통창이 있는 객실 중앙의 생활 공간.",cls:"room-living",symbol:"02",items:[
+  ["소파","거실 중앙에 놓인 대형 소파다.",["좌석 확인","쿠션 확인"],"소파와 쿠션의 외관을 확인했다."],
+  ["커피 테이블","소파 앞에 놓인 낮은 테이블이다.",["상판 확인","테이블 아래 확인"],"테이블 위와 아래의 상태를 확인했다."],
+  ["장식장","거실 벽면에 놓인 원목 장식장이다.",["장식장 전체 확인","선반 확인"],"장식장과 선반에 놓인 장식품의 배치를 확인했다."],
+  ["장식품이 놓였던 자리","장식장 선반의 비어 있는 공간이다.",["빈자리 자세히 살펴보기","주변 선반 확인"],"장식품이 놓였던 것으로 보이는 빈 공간을 확인했다. 장식품의 실제 위치와 소실 경위는 별도 확인이 필요하다.","E-003"],
+  ["찢어진 편지","거실에서 확인하는 문서 조사 지점이다.",["편지 조각 확인","문서 상태 확인"],"찢어진 편지 조각을 확인했다. 문서의 전체 내용과 훼손 경위는 추가 검토가 필요하다.","E-002"],
+  ["액자","거실 장식용 액자다.",["사진 확인"],"액자와 사진의 외관을 확인했다."],
+  ["카펫","거실 바닥을 덮고 있는 카펫이다.",["표면 확인","주변 바닥 확인"],"카펫과 주변 바닥의 외관을 확인했다."],
+  ["스탠드 조명","소파 옆에 놓인 조명이다.",["조명 확인"],"스탠드 조명의 외관과 전원 상태를 확인했다."],
+  ["커튼과 창가","거실 통창에 설치된 커튼이다.",["커튼 확인","창문 주변 확인"],"커튼과 창문 주변을 확인했다."]]},
+ {id:"dining",code:"C",name:"다이닝룸",en:"DINING ROOM",desc:"독립된 식탁과 와인 보관 공간이 마련된 식사 공간.",cls:"room-dining",symbol:"03",items:[
+  ["식탁","다이닝룸 중앙의 대형 식탁이다.",["식탁 상판 확인","식탁 아래 확인"],"식탁 위와 주변 배치 상태를 확인했다."],
+  ["와인잔 1","식탁 위에 놓인 첫 번째 와인잔이다.",["잔 외관 확인","잔의 위치 확인"],"첫 번째 와인잔의 외관과 놓인 위치를 확인했다. 감식 결과는 별도 자료에서 확인해야 한다.","E-001"],
+  ["와인잔 2","식탁 위에 놓인 두 번째 와인잔이다.",["잔 외관 확인","잔의 위치 확인"],"두 번째 와인잔의 외관과 놓인 위치를 확인했다. 두 잔만으로 사용자를 특정할 수는 없다.","E-001"],
+  ["와인병","식탁 주변에 놓인 와인병이다.",["라벨 확인","병 외관 확인"],"와인병의 라벨과 외관을 확인했다."],
+  ["냅킨","식탁 위에 놓인 냅킨이다.",["냅킨 상태 확인"],"냅킨의 상태를 확인했다."],
+  ["식기류","식탁에 배치된 식기류다.",["식기 배치 확인"],"식기류의 배치와 외관을 확인했다."],
+  ["식탁 의자","식탁 주변에 놓인 의자다.",["의자 배치 확인"],"의자의 배치와 상태를 확인했다."],
+  ["식탁 조명","식탁 위를 비추는 조명이다.",["조명 확인"],"조명의 외관과 작동 상태를 확인했다."],
+  ["와인 캐비닛","주류를 보관하는 캐비닛이다.",["캐비닛 열기","보관 상태 확인"],"와인 캐비닛에 보관된 주류와 내부 상태를 확인했다."]]},
+ {id:"study",code:"D",name:"서재",en:"PRIVATE STUDY",desc:"피해자가 업무를 보거나 개인 문서를 정리하던 독립 업무 공간.",cls:"room-study",symbol:"04",items:[
+  ["대형 책상","서재 중앙에 놓인 업무용 책상이다.",["책상 상판 확인","책상 주변 확인"],"책상 위와 주변에 놓인 물건을 확인했다."],
+  ["책상 서랍","책상에 부착된 서랍이다.",["첫 번째 서랍 확인","나머지 서랍 확인"],"서랍 내부의 보관 상태를 확인했다."],
+  ["책장","벽면을 채우는 원목 책장이다.",["책장 확인","책과 서류 확인"],"책장에 보관된 책과 자료를 확인했다."],
+  ["서류 캐비닛","회사 관련 서류를 보관하는 캐비닛이다.",["캐비닛 외관 확인","서류 보관함 확인"],"서류 캐비닛의 외관과 보관 공간을 확인했다."],
+  ["찢어진 계약서","피해자와 회사 관계자의 계약 관련 문서를 확인하는 조사 지점이다.",["계약서 조각 확인","문서 상태 확인"],"찢어진 계약서 조각을 확인했다. 문서의 전체 내용과 작성·훼손 경위는 추가 검토가 필요하다.","E-004"],
+  ["데스크톱 컴퓨터","업무용 컴퓨터다.",["모니터 확인","주변 장치 확인"],"컴퓨터와 주변 장치의 외관을 확인했다. 전산 자료는 별도 확보 절차가 필요하다."],
+  ["탁상시계","책상 위에 놓인 시계다.",["시계 표시 확인","시계 외관 확인"],"탁상시계의 표시와 외관을 확인했다. 시각의 정확성은 검증되지 않았다."],
+  ["한도윤 개인 메모","피해자의 개인 기록을 확인하는 조사 지점이다.",["메모 내용 확인","문서 상태 확인"],"한도윤의 개인 메모를 확인했다. 실제 문구와 작성 시점은 원본 자료 확정 후 반영한다.","E-010"],
+  ["금고","서재 한쪽에 설치된 개인 금고다.",["금고 외관 확인","잠금장치 확인"],"금고의 외관과 잠금장치를 확인했다. 내부 내용은 확인되지 않았다."],
+  ["책상 의자","업무용 의자다.",["의자 주변 확인"],"책상 의자와 주변 상태를 확인했다."],
+  ["스탠드 조명","책상 위를 비추는 조명이다.",["조명 확인"],"스탠드 조명의 외관을 확인했다."]]},
+ {id:"bedroom",code:"E",name:"침실",en:"BEDROOM",desc:"대형 침대와 양쪽 협탁이 있는 피해자의 개인 생활 공간.",cls:"room-bedroom",symbol:"05",items:[
+  ["침대","침실 중앙의 대형 침대다.",["침구 확인","침대 주변 확인"],"침구와 침대 주변의 외관을 확인했다."],
+  ["왼쪽 협탁","침대 왼쪽에 놓인 협탁이다.",["상판 확인","서랍 열기"],"협탁 상판과 서랍의 보관 상태를 확인했다."],
+  ["오른쪽 협탁","침대 오른쪽에 놓인 협탁이다.",["상판 확인","서랍 열기"],"협탁 상판과 서랍의 보관 상태를 확인했다."],
+  ["침대 조명","침대 양옆에 설치된 조명이다.",["스위치 확인"],"침대 조명의 외관과 작동 상태를 확인했다."],
+  ["침실 수납장","침실 안쪽의 수납장이다.",["수납장 열기"],"수납장 내부의 보관 상태를 확인했다."],
+  ["침실 전화기","침실에 놓인 객실 전화기다.",["기기 외관 확인","버튼 확인"],"객실 전화기의 외관을 확인했다."],
+  ["창문","침실의 대형 창문이다.",["창문 주변 확인"],"창문과 창틀의 외관을 확인했다."],
+  ["침실 카펫","침대 주변 바닥의 카펫이다.",["카펫 표면 확인"],"카펫의 외관을 확인했다."]]},
+ {id:"dressing",code:"F",name:"드레스룸",en:"DRESSING ROOM",desc:"의류와 개인 물품을 보관하는 독립 수납 공간.",cls:"room-dressing",symbol:"06",items:[
+  ["의류 보관함","벽면에 설치된 옷장이다.",["옷장 열기","의류 확인"],"보관된 의류와 옷장 내부를 확인했다."],
+  ["액세서리 서랍","개인 액세서리를 보관하는 서랍이다.",["서랍 열기"],"액세서리 서랍의 보관 상태를 확인했다."],
+  ["시계 보관함","손목시계 등을 보관하는 함이다.",["보관함 열기"],"시계 보관함의 외관과 내부를 확인했다."],
+  ["여행용 가방","개인 짐을 담는 가방이다.",["가방 외관 확인","내부 확인"],"여행용 가방의 외관과 내부를 확인했다."],
+  ["전신 거울","드레스룸에 설치된 전신 거울이다.",["거울과 프레임 확인"],"거울과 프레임의 외관을 확인했다."],
+  ["수납장","각종 개인 물품을 보관하는 수납장이다.",["서랍 열기"],"수납장 내부를 확인했다."]]},
+ {id:"bath",code:"G",name:"욕실",en:"BATHROOM",desc:"대리석 마감과 욕조, 샤워부스, 세면대가 있는 욕실.",cls:"room-bath",symbol:"07",items:[
+  ["세면대","욕실의 세면 공간이다.",["상판 확인","세면대 주변 확인"],"세면대와 주변 물품의 외관을 확인했다."],
+  ["거울","세면대 위에 설치된 거울이다.",["거울 표면 확인"],"거울과 주변 상태를 확인했다."],
+  ["욕조","욕실 안쪽의 독립형 욕조다.",["욕조 내부 확인","욕조 주변 확인"],"욕조와 주변의 외관을 확인했다."],
+  ["샤워부스","유리문으로 분리된 샤워 공간이다.",["샤워부스 내부 확인"],"샤워부스 내부의 상태를 확인했다."],
+  ["수건 보관함","수건을 보관하는 수납공간이다.",["보관함 열기"],"수건과 보관 공간을 확인했다."],
+  ["욕실 수납장","위생용품을 보관하는 수납장이다.",["수납장 열기"],"욕실 수납장 내부를 확인했다."],
+  ["욕실 휴지통","욕실 한쪽에 놓인 휴지통이다.",["휴지통 외관 확인","내부 확인"],"휴지통의 외관과 내부 상태를 확인했다."]]},
+ {id:"lounge",code:"H",name:"응접실",en:"PRIVATE LOUNGE",desc:"방문객과 사적인 대화를 나눌 수 있도록 분리된 접객 공간.",cls:"room-lounge",symbol:"08",items:[
+  ["소파","응접실 중앙의 소파다.",["좌석 확인","쿠션 확인"],"소파와 쿠션의 외관을 확인했다."],
+  ["안락의자","소파 맞은편에 놓인 안락의자다.",["의자 주변 확인"],"안락의자의 배치와 상태를 확인했다."],
+  ["원형 테이블","좌석 사이에 놓인 작은 테이블이다.",["테이블 상판 확인","테이블 아래 확인"],"원형 테이블과 주변을 확인했다."],
+  ["객실 전화기","응접실에 놓인 전화기다.",["기기 외관 확인","버튼 확인"],"전화기의 외관을 확인했다. 통화 내역은 별도 기록으로 확인해야 한다."],
+  ["벽면 액자","응접실 벽면의 장식 액자다.",["액자 확인"],"액자와 벽면의 외관을 확인했다."],
+  ["와인 캐비닛","응접실에 마련된 주류 보관함이다.",["캐비닛 열기","보관 상태 확인"],"와인 캐비닛 내부의 보관 상태를 확인했다."],
+  ["스탠드 조명","응접실 한쪽의 조명이다.",["조명 확인"],"스탠드 조명의 외관을 확인했다."]]}
+];
+let sceneState=JSON.parse(localStorage.getItem("crimeSceneProgress")||"{}");
+let activeRoom=null,activeObject=null;
+function saveScene(){localStorage.setItem("crimeSceneProgress",JSON.stringify(sceneState))}
+function roomState(roomId){if(!sceneState[roomId])sceneState[roomId]={inspected:{},steps:{}};if(!sceneState[roomId].inspected)sceneState[roomId].inspected={};if(!sceneState[roomId].steps)sceneState[roomId].steps={};return sceneState[roomId]}
+function roomDone(room){const st=roomState(room.id);return room.items.every((item,i)=>st.inspected[i])}
+const PLAN_GEOMETRY={
+ entrance:{x:365,y:455,w:220,h:125},living:{x:65,y:245,w:300,h:235},dining:{x:365,y:245,w:220,h:210},study:{x:585,y:245,w:260,h:210},bath:{x:845,y:245,w:125,h:210},lounge:{x:65,y:65,w:300,h:180},bedroom:{x:365,y:65,w:260,h:180},dressing:{x:625,y:65,w:220,h:180}
+};
+function planFurniture(room){
+ const shapes={
+  entrance:`<rect class="furn" x="390" y="485" width="62" height="32"/><path class="furn" d="M400 485v32M410 485v32M420 485v32"/><rect class="furn" x="500" y="500" width="45" height="22"/>`,
+  living:`<rect class="furn-fill" x="95" y="285" width="135" height="52" rx="8"/><path class="furn" d="M105 311h115M115 285v52M210 285v52"/><rect class="furn" x="125" y="365" width="105" height="58"/><rect class="furn" x="270" y="290" width="58" height="110"/><circle class="furn" cx="170" cy="390" r="16"/>`,
+  dining:`<rect class="furn" x="405" y="295" width="140" height="88" rx="3"/><path class="furn" d="M425 282v-16h18v16M500 282v-16h18v16M425 383v16h18v-16M500 383v16h18v-16"/><circle class="furn" cx="475" cy="338" r="12"/>`,
+  study:`<rect class="furn-fill" x="625" y="285" width="150" height="55"/><rect class="furn" x="642" y="350" width="116" height="44"/><path class="furn" d="M650 285v-18h100v18M800 270v150M790 280h20M790 310h20M790 340h20"/>`,
+  bath:`<rect class="furn" x="860" y="275" width="92" height="62" rx="22"/><rect class="furn" x="865" y="365" width="38" height="35"/><circle class="furn" cx="925" cy="385" r="17"/>`,
+  lounge:`<rect class="furn-fill" x="105" y="100" width="125" height="48" rx="8"/><rect class="furn" x="250" y="95" width="72" height="80"/><circle class="furn" cx="180" cy="185" r="24"/>`,
+  bedroom:`<rect class="furn-fill" x="415" y="95" width="155" height="100" rx="5"/><path class="furn" d="M415 125h155M490 95v30"/><rect class="furn" x="385" y="105" width="25" height="35"/><rect class="furn" x="575" y="105" width="25" height="35"/>`,
+  dressing:`<rect class="furn" x="645" y="90" width="42" height="120"/><rect class="furn" x="700" y="90" width="42" height="120"/><rect class="furn" x="755" y="90" width="65" height="52"/><rect class="furn" x="755" y="155" width="65" height="55"/>`
+ };
+ return shapes[room]||'';
+}
+function renderSuiteMap(){
+ const done=SUITE_ROOMS.filter(roomDone).length;
+ $("#scene-progress-text").textContent=`${done} / ${SUITE_ROOMS.length} 구역 조사 완료`;
+ $("#scene-progress-fill").style.width=(done/SUITE_ROOMS.length*100)+"%";
+ const svgParts=[`<defs><pattern id="planGrid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#d8d7cf" stroke-width=".6"/></pattern></defs><rect width="1000" height="620" fill="#eeece5"/><rect width="1000" height="620" fill="url(#planGrid)"/><text x="28" y="28" class="plan-north">N ↑</text><text x="820" y="600" class="plan-dimension">SCHEMATIC · NOT TO SCALE</text>`,
+ `<path d="M365 455H585V580H365Z" fill="#e3e0d7" stroke="#343c3c" stroke-width="7"/><text x="475" y="535" text-anchor="middle" class="plan-dimension">CENTRAL HALLWAY</text><path d="M365 500h220M475 455v125" stroke="#c0bdb4" stroke-width="1"/>`];
+ for(const r of SUITE_ROOMS){const g=PLAN_GEOMETRY[r.id];if(!g)continue;const st=roomState(r.id),doneCount=Object.values(st.inspected).filter(Boolean).length,finished=roomDone(r),active=activeRoom===r.id;let labelY=g.y+g.h-25;let labelX=g.x+g.w/2;
+  svgParts.push(`<g class="plan-room ${finished?'done':''} ${active?'active':''}" data-room="${r.id}" tabindex="0" role="button" aria-label="${r.name} 조사 구역"><rect class="room-fill" x="${g.x}" y="${g.y}" width="${g.w}" height="${g.h}"/><g>${planFurniture(r.id)}</g><text class="room-label" x="${labelX}" y="${labelY-10}" text-anchor="middle">${r.name}</text><text class="room-sub" x="${labelX}" y="${labelY+9}" text-anchor="middle">${r.en}</text><text class="room-count" x="${labelX}" y="${labelY+25}" text-anchor="middle">${doneCount} / ${r.items.length} OBJECTS CHECKED</text>${finished?`<circle class="done-mark" cx="${g.x+g.w-17}" cy="${g.y+17}" r="9"/><path d="M${g.x+g.w-21} ${g.y+17}l3 3 6 -7" fill="none" stroke="#fff" stroke-width="2"/>`:''}</g>`);
+ }
+ // architectural wall openings, door leaves and window marks
+ svgParts.push(`<path class="plan-window" d="M105 65h95M235 65h90M405 65h80M515 65h75M665 65h65M765 65h55M65 300v70M65 390v55M970 290v80M970 390v430"/><path class="plan-door" d="M365 285a38 38 0 0 1 38 -38M365 285h38M585 285a38 38 0 0 1 38 -38M585 285h38M365 390a38 38 0 0 0 38 38M365 390h38M585 390a38 38 0 0 0 38 38M585 390h38M845 330a34 34 0 0 1 34 -34M845 330h34M475 455a42 42 0 0 0 42 42M475 455v42"/><path d="M50 50H985V590H350V465H50Z" fill="none" stroke="#30383a" stroke-width="8"/><text x="500" y="610" text-anchor="middle" class="plan-dimension">HOTEL ARDEN · PRESIDENTIAL SUITE · LEVEL 32</text>`);
+ $("#suite-map").innerHTML=svgParts.join('');
+ document.querySelectorAll("#suite-map [data-room]").forEach(g=>{g.addEventListener('click',()=>openRoom(g.dataset.room));g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openRoom(g.dataset.room)}})});
+}
+function openRoom(roomId){activeRoom=roomId;activeObject=null;renderSuiteMap();renderRoomDetail();$("#scene-back-map").style.display="inline-block";if(window.matchMedia("(max-width:700px)").matches)$("#room-detail").scrollIntoView({behavior:"smooth",block:"start"})}
+function roomObjectPositions(count){const pts=[];const cols=4;for(let i=0;i<count;i++){const row=Math.floor(i/cols),col=i%cols;pts.push({x:12+col*25,y:20+row*(count>8?28:38)})}return pts}
+function renderRoomDetail(){
+ const room=SUITE_ROOMS.find(r=>r.id===activeRoom);if(!room){$("#room-detail").innerHTML="";$("#scene-back-map").style.display="none";return}
+ const st=roomState(room.id),done=room.items.filter((x,i)=>st.inspected[i]).length,positions=roomObjectPositions(room.items.length);
+ const hot=room.items.map((item,i)=>{const pt=positions[i];return `<button class="object-hotspot ${st.inspected[i]?'done':''} ${activeObject===i?'active':''}" style="left:${pt.x}%;top:${pt.y}%" data-object="${i}" title="${escapeHTML(item[0])}">${escapeHTML(item[0])}</button>`}).join('');
+ const cards=room.items.map((item,i)=>`<button class="object-card ${st.inspected[i]?"done":""} ${activeObject===i?"active":""}" data-object="${i}"><span class="object-status">${st.inspected[i]?"조사 완료":"조사 가능"}</span><b>${escapeHTML(item[0])}</b><small>${escapeHTML(item[1])}</small></button>`).join("");
+ $("#room-detail").innerHTML=`<div class="room-detail-head"><div><span class="eyebrow">ROOM ${room.code} · ${room.en}</span><h3>${room.name}</h3><p>${room.desc}</p></div><div class="room-stats"><div><strong>${done} / ${room.items.length}</strong><small>조사 완료 오브젝트</small></div><button class="btn room-back" id="room-back">평면도로 돌아가기</button></div></div>
+ <div class="room-plan-panel"><div class="room-plan-title"><span>ROOM OBJECT PLAN</span><span>SELECT AN OBJECT</span></div><div class="object-map"><div class="object-map-furniture" style="left:8%;top:12%;width:24%;height:24%">FURNITURE</div><div class="object-map-furniture" style="right:8%;bottom:12%;width:22%;height:28%">STORAGE</div>${hot}</div></div>
+ <div class="scene-subhead"><h3>조사 가능한 오브젝트</h3><span>${room.items.length} OBJECTS</span></div><div class="object-grid">${cards}</div><div id="object-inspector"></div>`;
+ document.querySelectorAll("#room-detail [data-object]").forEach(b=>b.onclick=()=>{activeObject=Number(b.dataset.object);renderRoomDetail();renderObjectInspector()});
+ $("#room-back").onclick=()=>{activeRoom=null;activeObject=null;renderSuiteMap();renderRoomDetail()};
+ if(activeObject!==null)renderObjectInspector();
+}
+function renderObjectInspector(){
+ const room=SUITE_ROOMS.find(r=>r.id===activeRoom);if(!room||activeObject===null)return;
+ const item=room.items[activeObject],st=roomState(room.id),key=String(activeObject),steps=st.steps[key]||[],modes=st.modes||(st.modes={}),mode=modes[key]||(modes[key]={observe:false,magnify:false,interact:false,targets:[]}),isDone=!!st.inspected[activeObject],evidenceId=item[4]||null,evidence=E.find(e=>e[0]===evidenceId),allSteps=steps.length>=item[2].length;
+ const targets=["표면과 외관","가장자리와 틈새","주변 배치"];
+ const toolHtml=`<div class="inspect-tools"><button class="inspect-tool ${mode.observe?'active':''}" data-mode="observe"><b>01 · 관찰</b>전체 모습 살펴보기</button><button class="inspect-tool ${mode.magnify?'active':''}" data-mode="magnify" ${!mode.observe?'disabled':''}><b>02 · 확대 조사</b>세부 영역 탐색</button><button class="inspect-tool ${mode.interact?'active':''}" data-mode="interact" ${!mode.observe?'disabled':''}><b>03 · 조작</b>직접 열고 확인하기</button></div>`;
+ let stage='';
+ if(mode.observe)stage+=`<div class="inspect-stage"><h4>VISUAL INSPECTION · 관찰</h4><p>${escapeHTML(item[1])}</p><span class="muted">전체 외관을 확인했습니다. 확대 조사 또는 직접 조작을 진행할 수 있습니다.</span></div>`;
+ if(mode.magnify)stage+=`<div class="inspect-stage"><h4>MAGNIFIER · 세부 영역 선택</h4><p>확인할 영역을 하나씩 선택하십시오. 이 단계는 조사 범위를 지정하며, 별도 감식 결과를 의미하지 않습니다.</p><div class="search-targets">${targets.map((t,i)=>`<button class="search-target ${mode.targets.includes(i)?'done':''}" data-target="${i}" ${mode.targets.includes(i)?'disabled':''}>${mode.targets.includes(i)?'✓ ':''}${t}</button>`).join('')}</div></div>`;
+ if(mode.interact)stage+=`<div class="inspect-stage"><h4>INTERACTION · 직접 조사</h4><p>오브젝트에 맞는 행동을 선택해 조사하십시오. 모든 항목을 확인하면 조사 기록이 정리됩니다.</p><div class="inspect-steps">${item[2].map((step,i)=>`<button class="inspect-step ${steps.includes(i)?'done':''}" data-inspect-step="${i}" ${steps.includes(i)?'disabled':''}><span>${i+1}. ${escapeHTML(step)}</span><span>${steps.includes(i)?'확인 완료':'실행'}</span></button>`).join('')}</div></div>`;
+ const result=allSteps?`<div class="inspect-result">${escapeHTML(item[3])}</div>`:(mode.interact?`<div class="inspect-result">조사 항목 ${steps.length} / ${item[2].length} 확인 완료</div>`:'');
+ let evidencePanel="";if(evidenceId&&allSteps){const got=collected.includes(evidenceId);evidencePanel=`<div class="evidence-found"><strong>${got?"EVIDENCE SECURED":"EVIDENCE FOUND"}</strong><div><b>${evidenceId} · ${evidence?evidence[1]:"증거"}</b></div><p>${got?"이미 증거 자료실에 등록된 증거입니다.":"현장에서 증거를 발견했습니다. 내용을 확인한 뒤 확보하십시오."}</p><button class="btn primary" id="secure-evidence" ${got?"disabled":""}>${got?"확보 완료":"증거 확보"}</button></div>`}
+ $("#object-inspector").innerHTML=`<div class="object-inspector"><div class="object-inspector-head"><div><span class="eyebrow">OBJECT INSPECTION · ${room.code}-${String(activeObject+1).padStart(2,"0")}</span><h3>${escapeHTML(item[0])}</h3></div><span class="tag">${isDone?"조사 완료":"조사 중"}</span></div><p>조사 방식을 선택하십시오. 관찰을 먼저 진행하면 확대 조사와 직접 조작이 활성화됩니다.</p>${toolHtml}${stage}${result}${evidencePanel}</div>`;
+ document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{const m=b.dataset.mode;if(m==='observe')mode.observe=true;else if(mode.observe)mode[m]=true;saveScene();renderRoomDetail();renderObjectInspector()});
+ document.querySelectorAll('[data-target]').forEach(b=>b.onclick=()=>{const n=Number(b.dataset.target);if(!mode.targets.includes(n))mode.targets.push(n);saveScene();renderRoomDetail();renderObjectInspector()});
+ document.querySelectorAll('[data-inspect-step]').forEach(b=>b.onclick=()=>{const n=Number(b.dataset.inspectStep);if(!steps.includes(n)){steps.push(n);st.steps[key]=steps;if(steps.length>=item[2].length)st.inspected[activeObject]=true;saveScene();renderSuiteMap();renderRoomDetail();renderObjectInspector()}});
+ const secure=$("#secure-evidence");if(secure)secure.onclick=()=>{if(!collected.includes(evidenceId)){collected.push(evidenceId);update();renderE();renderInterSuspects();if(currentSuspect)renderInterrogation();toast(`${evidenceId} 증거를 확보했습니다.`)}st.inspected[activeObject]=true;saveScene();renderSuiteMap();renderRoomDetail();renderObjectInspector()};
+}
+$("#scene-back-map").onclick=()=>{activeRoom=null;activeObject=null;renderSuiteMap();renderRoomDetail()};
+renderSuiteMap();
+function evcard(e){let got=collected.includes(e[0]);let sceneOnly=["E-001","E-002","E-003","E-004","E-010"].includes(e[0]);return `<article class="card evidence ${got?"got":""}"><div style="display:flex;justify-content:space-between"><span class="eyebrow">${e[0]}</span><span class="tag">${e[2]==="scene"?"현장":e[2]==="record"?"기록":"추가 조사"}</span></div><h3>${e[1]}</h3><div class="muted">${e[3]}</div><p>${e[4]}</p>${sceneOnly&&!got?`<button class="btn" disabled>현장 조사에서 확보</button>`:`<button class="btn ${got?"":"primary"}" data-collect="${e[0]}" ${got?"disabled":""}>${got?"확보 완료":"증거 확보"}</button>`}</article>`}
 function renderE(){let list=E.filter(e=>filter==="all"||e[2]===filter);$("#evidence-list").innerHTML=list.map(evcard).join("");document.querySelectorAll("[data-collect]").forEach(b=>b.onclick=()=>{if(!collected.includes(b.dataset.collect)){collected.push(b.dataset.collect);update();renderE();renderInterSuspects();if(currentSuspect)renderInterrogation();toast(b.dataset.collect+" 증거를 확보했습니다.")}})}
 document.querySelector(".tabs").onclick=e=>{let b=e.target.closest("[data-filter]");if(!b)return;filter=b.dataset.filter;document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t===b));renderE()};
 document.querySelectorAll("[data-loc]").forEach(b=>b.onclick=()=>{let ids=b.dataset.loc.split(",");filter="all";go("evidence");document.querySelector(".tabs").querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.filter==="all"));$("#evidence-list").innerHTML=E.filter(e=>ids.includes(e[0])).map(evcard).join("");document.querySelectorAll("[data-collect]").forEach(x=>x.onclick=()=>{collected.push(x.dataset.collect);update();renderE();renderInterSuspects();if(currentSuspect)renderInterrogation();toast("증거를 확보했습니다.")})});
