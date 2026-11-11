@@ -61,15 +61,21 @@ main{padding:0 19px}
 .filter-row::-webkit-scrollbar{display:none}
 .chip{white-space:nowrap;border:1px solid var(--line);background:transparent;border-radius:30px;padding:8px 12px;font-size:10px;color:var(--muted)}
 .chip.selected{border-color:var(--gold);color:var(--gold);background:#b69a6a12}
-.evidence-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.evidence-card{padding:13px;min-height:145px;text-align:left;display:flex;flex-direction:column;justify-content:space-between}
-.ev-icon{height:49px;border-radius:9px;background:linear-gradient(135deg,#34383a,#202326);display:grid;place-items:center;font-size:23px;color:#b9a98e;margin-bottom:12px}
+.evidence-grid{display:grid;grid-template-columns:1fr;gap:8px}
+.evidence-card{padding:12px;min-height:76px;text-align:left;display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:12px}
+.ev-icon{width:42px;height:42px;flex:0 0 42px;border-radius:9px;background:linear-gradient(135deg,#34383a,#202326);display:grid;place-items:center;font-size:19px;color:#b9a98e}
+.ev-copy{flex:1;min-width:0}
 .ev-code{font-size:9px;color:var(--gold);letter-spacing:.12em}
-.ev-name{font-size:12px;font-weight:700;margin:5px 0}
+.ev-name{font-size:12px;font-weight:700;margin:4px 0}
 .ev-type{font-size:10px;color:var(--muted)}
+.ev-arrow{color:#858d90;font-size:18px;margin-left:auto}
 .locked{opacity:.42;filter:grayscale(1)}
 .suspect-list{display:grid;gap:10px}
 .suspect-card{display:flex;align-items:center;gap:13px;padding:13px;text-align:left;width:100%}
+.deduction-shortcut{width:100%;display:flex;align-items:center;gap:13px;padding:15px;background:#252321;border:1px solid #756447;border-radius:13px;text-align:left;margin-top:14px}
+.deduction-shortcut .avatar{background:linear-gradient(145deg,#66553a,#29251f);color:#e0c99e}
+.deduction-shortcut strong{display:block;font-size:13px;margin-bottom:5px}
+.deduction-shortcut span{display:block;font-size:10px;color:#b9ad97}
 .avatar{width:52px;height:58px;border-radius:8px;background:linear-gradient(145deg,#46413b,#1d2022);display:grid;place-items:center;font:21px Georgia,serif;color:#d3c5ac;flex-shrink:0}
 .suspect-info{flex:1;min-width:0}
 .suspect-info strong{display:block;font-size:13px;margin-bottom:5px}
@@ -81,7 +87,7 @@ main{padding:0 19px}
 .progress>i{display:block;width:20%;height:100%;background:var(--gold);transition:width .2s}
 .bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(100%,520px);height:72px;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:#171a1cF2;border-top:1px solid #34393d;display:grid;grid-template-columns:repeat(4,1fr);backdrop-filter:blur(12px);z-index:10}
 .nav-btn{border:0;background:transparent;color:#777f82;font-size:9px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px}
-.nav-btn .nav-icon{font-size:18px;line-height:1}
+.nav-btn .nav-icon{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.55;stroke-linecap:round;stroke-linejoin:round}
 .nav-btn.active{color:var(--gold)}
 .modal-backdrop{display:none;position:fixed;inset:0;background:#000b;z-index:20;align-items:flex-end;justify-content:center}
 .modal-backdrop.show{display:flex}
@@ -158,6 +164,12 @@ label{font-size:10px;color:var(--muted)}
       <div class="page-title"><div class="eyebrow">03 / PERSONS OF INTEREST</div><h1>용의자 목록</h1><p>조사 대상자의 인적 사항과 심문 기록을 확인한다.</p></div>
       <div class="suspect-list" id="suspectList"></div>
       <div class="notice"><b>!</b><span>심문 대본과 인물별 상세 설정은 기존 CASE 001 자료를 반영해 교체할 수 있도록 구성했다.</span></div>
+      <div class="section-head"><h2>CASE CONCLUSION</h2><small>INVESTIGATION FINAL</small></div>
+      <button class="deduction-shortcut" onclick="showView('deduction')">
+        <div class="avatar">∴</div>
+        <div style="flex:1"><strong>최종 추리</strong><span>모든 단서를 검토하고 사건의 결론을 제출한다.</span></div>
+        <span class="arrow">›</span>
+      </button>
     </section>
 
     <section class="view" id="interrogation">
@@ -179,10 +191,18 @@ label{font-size:10px;color:var(--muted)}
     </section>
   </main>
   <nav class="bottom-nav">
-    <button class="nav-btn active" data-view="home" onclick="showView('home')"><span class="nav-icon">⌂</span>CASE FILE</button>
-    <button class="nav-btn" data-view="evidence" onclick="showView('evidence')"><span class="nav-icon">▤</span>EVIDENCE</button>
-    <button class="nav-btn" data-view="suspects" onclick="showView('suspects')"><span class="nav-icon">♙</span>SUSPECTS</button>
-    <button class="nav-btn" data-view="deduction" onclick="showView('deduction')"><span class="nav-icon">⌕</span>DEDUCTION</button>
+    <button class="nav-btn active" data-view="home" onclick="showView('home')">
+      <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7.5h6l2 2h8v9H4z"/><path d="M4 7.5V5h7l2 2.5"/></svg>사건 파일
+    </button>
+    <button class="nav-btn" data-view="evidence" onclick="showView('evidence')">
+      <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5h9l5 5v10H5z"/><path d="M14 4.5v5h5M8 13h8M8 16.5h6"/></svg>증거 보관함
+    </button>
+    <button class="nav-btn" data-view="suspects" onclick="showView('suspects')">
+      <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.2"/><path d="M5.5 19c.7-3.2 3-5 6.5-5s5.8 1.8 6.5 5z"/></svg>용의자
+    </button>
+    <button class="nav-btn" data-view="briefing" onclick="showView('briefing')">
+      <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 19 6v5.2c0 4.4-2.7 7.4-7 9.3-4.3-1.9-7-4.9-7-9.3V6z"/><path d="m9 12 2 2 4-4"/></svg>수사 파일
+    </button>
   </nav>
 </div>
 
@@ -215,7 +235,7 @@ function renderSuspects(target){
 }
 function renderEvidence(filter="all"){
  const items=evidence.filter(e=>filter==="all"||e.type===filter);
- document.getElementById("evidenceGrid").innerHTML=items.map(e=>`<button class="evidence-card" onclick="openEvidence('${e.id}')"><div><div class="ev-icon">${e.icon}</div><div class="ev-code">${e.id}</div><div class="ev-name">${e.name}</div></div><div class="ev-type">${e.label} · ${viewed.has(e.id)?"열람 완료":"열람 전"}</div></button>`).join("");
+ document.getElementById("evidenceGrid").innerHTML=items.map(e=>`<button class="evidence-card" onclick="openEvidence('${e.id}')"><div class="ev-icon">${e.icon}</div><div class="ev-copy"><div class="ev-code">${e.id}</div><div class="ev-name">${e.name}</div><div class="ev-type">${e.label} · ${viewed.has(e.id)?"열람 완료":"열람 전"}</div></div><span class="ev-arrow">›</span></button>`).join("");
  document.getElementById("evCount").textContent=`${viewed.size} / ${evidence.length} 확인`;
  document.getElementById("evProgress").style.width=(viewed.size/evidence.length*100)+"%";
 }
