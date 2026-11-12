@@ -15,8 +15,9 @@
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;letter-spacing:-.02em}
 button{font:inherit;color:inherit;cursor:pointer}
-.app{width:min(100%,520px);min-height:100dvh;margin:0 auto;background:linear-gradient(180deg,#15181a 0%,#111315 35%);position:relative;padding-bottom:86px;overflow:hidden}
-.topbar{height:54px;padding:0 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #292e32;color:var(--muted);font-size:11px;letter-spacing:.16em}
+.app{width:min(100%,520px);min-height:100dvh;margin:0 auto;background:linear-gradient(180deg,#15181a 0%,#111315 35%);position:relative;padding-bottom:28px;overflow:hidden}
+.site-header{position:sticky;top:0;z-index:15;background:#15181af2;backdrop-filter:blur(14px);border-bottom:1px solid #34393d}
+.topbar{height:48px;padding:0 18px;display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:10px;letter-spacing:.16em}
 .brand{font-weight:800;color:var(--text);letter-spacing:.22em}
 .status{display:flex;gap:7px;align-items:center}
 .status-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px #b64b4380}
@@ -85,10 +86,20 @@ main{padding:0 19px}
 .progress-label{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-bottom:8px}
 .progress{height:4px;background:#34393d;border-radius:5px;overflow:hidden}
 .progress>i{display:block;width:20%;height:100%;background:var(--gold);transition:width .2s}
-.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(100%,520px);height:72px;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:#171a1cF2;border-top:1px solid #34393d;display:grid;grid-template-columns:repeat(4,1fr);backdrop-filter:blur(12px);z-index:10}
-.nav-btn{border:0;background:transparent;color:#777f82;font-size:9px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px}
-.nav-btn .nav-icon{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.55;stroke-linecap:round;stroke-linejoin:round}
-.nav-btn.active{color:var(--gold)}
+.header-right{display:flex;align-items:center;gap:13px}
+.menu-toggle{width:32px;height:32px;border:1px solid #3a4145;border-radius:8px;background:#202528;display:grid;place-items:center;color:#d7d6d0;padding:6px}
+.menu-toggle svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round}
+.header-left{display:flex;align-items:center;gap:11px}
+.tool-menu{display:none;position:absolute;left:12px;top:43px;width:min(270px,calc(100vw - 42px));padding:7px;background:#202427;border:1px solid #41484c;border-radius:12px;box-shadow:0 16px 38px #0009;z-index:30}
+.tool-menu.open{display:block;animation:fade .15s ease}
+.menu-item{width:100%;display:flex;align-items:center;gap:11px;padding:12px 10px;border:0;border-radius:8px;background:transparent;text-align:left;color:var(--text)}
+.menu-item+.menu-item{border-top:1px solid #343b3f}
+.menu-item:active{background:#343a3d}
+.menu-symbol{width:30px;height:30px;flex:0 0 30px;display:grid;place-items:center;border-radius:8px;background:#303638;color:var(--gold);font-size:17px}
+.menu-item span:nth-child(2){flex:1;min-width:0}
+.menu-item strong{display:block;font-size:11px;margin-bottom:4px}
+.menu-item small{display:block;color:var(--muted);font-size:9px}
+.menu-item b{font-size:17px;color:#899195;font-weight:400}
 .modal-backdrop{display:none;position:fixed;inset:0;background:#000b;z-index:20;align-items:flex-end;justify-content:center}
 .modal-backdrop.show{display:flex}
 .modal{width:min(100%,520px);max-height:82dvh;overflow:auto;background:#1b1f21;border:1px solid #42484b;border-radius:19px 19px 0 0;padding:20px 20px calc(24px + env(safe-area-inset-bottom));animation:slide .2s ease}
@@ -108,12 +119,30 @@ input,textarea,select{width:100%;background:#111416;border:1px solid var(--line)
 label{font-size:10px;color:var(--muted)}
 .empty{padding:30px 15px;text-align:center;border:1px dashed #3c4245;border-radius:12px;color:var(--muted);font-size:11px;line-height:1.8}
 .footer-note{text-align:center;font-size:9px;color:#687074;padding:25px 0 12px;letter-spacing:.08em}
-@media(min-width:600px){body{padding:24px 0}.app{border:1px solid #34393d;border-radius:24px;min-height:calc(100dvh - 48px)}.bottom-nav{bottom:24px;border-radius:0 0 24px 24px}.modal-backdrop{align-items:center}.modal{border-radius:18px}}
+@media(min-width:600px){body{padding:24px 0}.app{border:1px solid #34393d;border-radius:24px;min-height:calc(100dvh - 48px)}.site-header{border-radius:24px 24px 0 0}.modal-backdrop{align-items:center}.modal{border-radius:18px}}
 </style>
 </head>
 <body>
 <div class="app">
-  <div class="topbar"><div class="brand">SCENE FILES</div><div class="status"><i class="status-dot"></i> CASE ARCHIVE <span> / 001</span></div></div>
+  <header class="site-header">
+    <div class="topbar">
+      <div class="header-left">
+        <button class="menu-toggle" id="menuToggle" onclick="toggleMenu(event)" aria-label="조사 메뉴 열기" aria-expanded="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6.5h16M4 12h16M4 17.5h16"/></svg>
+        </button>
+        <div class="brand">SCENE FILES</div>
+      </div>
+      <div class="header-right">
+        <div class="status"><i class="status-dot"></i> CASE ARCHIVE <span> / 001</span></div>
+      </div>
+    </div>
+    <nav class="tool-menu" id="toolMenu" aria-label="조사 메뉴">
+      <button class="menu-item" onclick="navigateFromMenu('briefing')"><span class="menu-symbol">▤</span><span><strong>수사 파일</strong><small>사건 개요 및 용의자 정보</small></span><b>›</b></button>
+      <button class="menu-item" onclick="navigateFromMenu('evidence')"><span class="menu-symbol">⌕</span><span><strong>증거 보관함</strong><small>확보한 증거와 조사 자료</small></span><b>›</b></button>
+      <button class="menu-item" onclick="navigateFromMenu('notes')"><span class="menu-symbol">✎</span><span><strong>수사 노트</strong><small>개인 메모 및 추론 기록</small></span><b>›</b></button>
+      <button class="menu-item" onclick="navigateFromMenu('deduction')"><span class="menu-symbol">∴</span><span><strong>최종 추리</strong><small>사건의 결론 제출</small></span><b>›</b></button>
+    </nav>
+  </header>
   <main>
     <section class="view active" id="home">
       <div class="hero">
@@ -134,7 +163,7 @@ label{font-size:10px;color:var(--muted)}
       <div class="section-head"><h2>INVESTIGATION MENU</h2><small>조사 항목</small></div>
       <div class="action-row">
         <button class="secondary" onclick="showView('evidence')">증거 보관함</button>
-        <button class="secondary" onclick="showView('suspects')">용의자 목록</button>
+        <button class="secondary" onclick="showView('briefing')">수사 파일 열기</button>
       </div>
     </section>
 
@@ -160,23 +189,22 @@ label{font-size:10px;color:var(--muted)}
       <div class="footer-note">EVIDENCE IS NOT A CONCLUSION.</div>
     </section>
 
-    <section class="view" id="suspects">
-      <div class="page-title"><div class="eyebrow">03 / PERSONS OF INTEREST</div><h1>용의자 목록</h1><p>조사 대상자의 인적 사항과 심문 기록을 확인한다.</p></div>
-      <div class="suspect-list" id="suspectList"></div>
-      <div class="notice"><b>!</b><span>심문 대본과 인물별 상세 설정은 기존 CASE 001 자료를 반영해 교체할 수 있도록 구성했다.</span></div>
-      <div class="section-head"><h2>CASE CONCLUSION</h2><small>INVESTIGATION FINAL</small></div>
-      <button class="deduction-shortcut" onclick="showView('deduction')">
-        <div class="avatar">∴</div>
-        <div style="flex:1"><strong>최종 추리</strong><span>모든 단서를 검토하고 사건의 결론을 제출한다.</span></div>
-        <span class="arrow">›</span>
-      </button>
-    </section>
+
 
     <section class="view" id="interrogation">
       <div class="page-title"><div class="eyebrow">04 / INTERROGATION ROOM</div><h1>심문실</h1><p>대상자를 선택하고 질문 및 증거 제시를 진행한다.</p></div>
       <div class="info-card"><div class="eyebrow">INTERROGATION SYSTEM</div><p>실제 심문 대본을 연결하기 전의 기능 데모다. 용의자를 선택하면 심문 화면이 열리고, 확보한 증거를 선택해 제시할 수 있다.</p></div>
       <div class="section-head"><h2>SELECT SUSPECT</h2><small>조사 대상</small></div>
       <div class="suspect-list" id="interrogationList"></div>
+    </section>
+
+    <section class="view" id="notes">
+      <div class="page-title"><div class="eyebrow">05 / INVESTIGATION NOTES</div><h1>수사 노트</h1><p>조사 과정에서 발견한 단서와 개인적인 추론을 기록한다.</p></div>
+      <div class="info-card"><div class="eyebrow">PRIVATE INVESTIGATION LOG</div><p>작성한 내용은 이 기기의 브라우저에 저장된다. 사건의 공식 증거와 개인적인 추론을 구분해서 기록하는 것을 권장한다.</p></div>
+      <label for="investigationNotes">MY NOTES</label>
+      <textarea id="investigationNotes" rows="12" placeholder="발견한 단서, 시간대별 의문점, 용의자 진술의 모순 등을 자유롭게 기록하세요."></textarea>
+      <button class="primary" onclick="saveNotes()">수사 노트 저장</button>
+      <div id="notesStatus" class="footer-note">자동 저장되지 않으므로 작성 후 저장을 눌러 주세요.</div>
     </section>
 
     <section class="view" id="deduction">
@@ -190,20 +218,7 @@ label{font-size:10px;color:var(--muted)}
       <div id="deductionResult"></div>
     </section>
   </main>
-  <nav class="bottom-nav">
-    <button class="nav-btn active" data-view="home" onclick="showView('home')">
-      <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7.5h6l2 2h8v9H4z"/><path d="M4 7.5V5h7l2 2.5"/></svg>사건 파일
-    </button>
-    <button class="nav-btn" data-view="evidence" onclick="showView('evidence')">
-      <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5h9l5 5v10H5z"/><path d="M14 4.5v5h5M8 13h8M8 16.5h6"/></svg>증거 보관함
-    </button>
-    <button class="nav-btn" data-view="suspects" onclick="showView('suspects')">
-      <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.2"/><path d="M5.5 19c.7-3.2 3-5 6.5-5s5.8 1.8 6.5 5z"/></svg>용의자
-    </button>
-    <button class="nav-btn" data-view="briefing" onclick="showView('briefing')">
-      <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 19 6v5.2c0 4.4-2.7 7.4-7 9.3-4.3-1.9-7-4.9-7-9.3V6z"/><path d="m9 12 2 2 4-4"/></svg>수사 파일
-    </button>
-  </nav>
+
 </div>
 
 <div class="modal-backdrop" id="modal" onclick="if(event.target===this)closeModal()">
@@ -227,9 +242,27 @@ const evidence=[
 let viewed=new Set();
 function showView(id){
  document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===id));
- document.querySelectorAll(".nav-btn").forEach(b=>b.classList.toggle("active",b.dataset.view===id || (id==="interrogation"&&b.dataset.view==="suspects")));
+ closeMenu();
  window.scrollTo({top:0,behavior:"smooth"});
 }
+function toggleMenu(event){
+ event.stopPropagation();
+ const menu=document.getElementById("toolMenu");
+ const button=document.getElementById("menuToggle");
+ const opened=menu.classList.toggle("open");
+ button.setAttribute("aria-expanded",String(opened));
+}
+function closeMenu(){
+ const menu=document.getElementById("toolMenu");
+ const button=document.getElementById("menuToggle");
+ if(menu) menu.classList.remove("open");
+ if(button) button.setAttribute("aria-expanded","false");
+}
+function navigateFromMenu(id){showView(id)}
+document.addEventListener("click",event=>{
+ const header=document.querySelector(".site-header");
+ if(header&&!header.contains(event.target)) closeMenu();
+});
 function renderSuspects(target){
  document.getElementById(target).innerHTML=suspects.map((s,i)=>`<button class="suspect-card" onclick="openSuspect(${i})"><div class="avatar">${s.initial}</div><div class="suspect-info"><strong>${s.name}</strong><span>${s.role}</span></div><span class="arrow">›</span></button>`).join("");
 }
@@ -260,7 +293,14 @@ function submitDeduction(){
  if(!culprit||!reason){result.innerHTML='<div class="notice" style="margin-top:15px">범인과 판단 근거를 모두 입력해야 한다.</div>';return}
  result.innerHTML=`<div class="info-card" style="margin-top:15px"><div class="eyebrow">SUBMISSION SAVED · DEMO</div><p>지목한 인물: <b>${culprit}</b><br>작성한 근거가 임시 제출되었다. 실제 정답 판정 및 엔딩 분기는 추후 연결한다.</p></div>`;
 }
-renderSuspects("briefSuspects");renderSuspects("suspectList");renderSuspects("interrogationList");renderEvidence();
+renderSuspects("briefSuspects");renderSuspects("interrogationList");renderEvidence();
+const notesField=document.getElementById("investigationNotes");
+if(notesField){notesField.value=localStorage.getItem("crimeSceneCase001Notes")||"";}
+function saveNotes(){
+ const value=document.getElementById("investigationNotes").value;
+ localStorage.setItem("crimeSceneCase001Notes",value);
+ document.getElementById("notesStatus").textContent="저장 완료 · 이 브라우저에 기록됨";
+}
 </script>
 </body>
 </html>
